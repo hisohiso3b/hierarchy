@@ -27,7 +27,6 @@ class PathTVC: UITableViewController, UIGestureRecognizerDelegate, DZNEmptyDataS
         
         // UILongPressGestureRecognizer宣言
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: "cellLongPressed:")
-        // `UIGestureRecognizerDelegate`を設定するのをお忘れなく
         longPressRecognizer.delegate = self
         // tableViewにrecognizerを設定
         tableView.addGestureRecognizer(longPressRecognizer)

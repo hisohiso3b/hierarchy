@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4903AFA01C5E3A20007DFE65 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4903AF9F1C5E3A20007DFE65 /* Consts.swift */; };
 		8822AF9C4D7E7680F883721C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD9DD094C57D81BAF14FBC5 /* Pods.framework */; };
 		B0354A3A1B1F3A3D00E608BE /* UpdateProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0354A391B1F3A3D00E608BE /* UpdateProfileVC.swift */; };
 		B0A1BA571B1DCB9A00844D38 /* arrow031.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A1BA561B1DCB9A00844D38 /* arrow031.png */; };
@@ -92,6 +93,7 @@
 
 /* Begin PBXFileReference section */
 		068EA4F272C00A70F629741E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		4903AF9F1C5E3A20007DFE65 /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		7D91179FC8EFAD720F7811F1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B0354A391B1F3A3D00E608BE /* UpdateProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfileVC.swift; sourceTree = "<group>"; };
 		B0A1BA561B1DCB9A00844D38 /* arrow031.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow031.png; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 			children = (
 				4903AF9E1C5E32DD007DFE65 /* Net */,
 				B0DEB3101B1D383600A505AA /* Main.storyboard */,
+				4903AF9F1C5E3A20007DFE65 /* Consts.swift */,
 				B0DEB30A1B1D383600A505AA /* AppDelegate.swift */,
 				B0DEB30C1B1D383600A505AA /* FirstViewController.swift */,
 				B0DEB35C1B1D5B3C00A505AA /* RootTVC.swift */,
@@ -500,6 +503,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0EE21171B215CC3009DD50F /* Net.swift in Sources */,
+				4903AFA01C5E3A20007DFE65 /* Consts.swift in Sources */,
 				B0EE21151B215CBF009DD50F /* GCD.swift in Sources */,
 				B0EE21191B215CCE009DD50F /* NetData.swift in Sources */,
 				B0EE211D1B215CD6009DD50F /* NetHelper.swift in Sources */,

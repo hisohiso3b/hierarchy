@@ -24,6 +24,7 @@ class RootTVC: UITableViewController {
     override func viewDidLoad() {
         //self.canDisplayBannerAds = true
         
+        //ナビゲーションコントローラのスタイル設定
         self.navigationController?.navigationBar.barTintColor = UIColor(red:0.863, green:0.078, blue:0.235, alpha: 1.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
@@ -32,6 +33,7 @@ class RootTVC: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        //スワイプ更新
         self.refreshControl = UIRefreshControl()
         self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
         self.refreshControl!.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
@@ -42,8 +44,6 @@ class RootTVC: UITableViewController {
         ud.setObject("/", forKey: "selected_path")
         //reload(self)
         super.viewDidAppear(animated)
-        
-        //var temp :Float = Float(entries.count) * Float(50.0)
         
     }
     
@@ -61,15 +61,7 @@ class RootTVC: UITableViewController {
     //make tableView
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         //get cell
-        let cell = tableView.dequeueReusableCellWithIdentifier("HierarchyCell", forIndexPath: indexPath) //UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: "user")
-        
-        /*
-        var randr : Float = randFloat(Min: 0.7, Max: 0.9)
-        var randg : Float = randFloat(Min: 0.7, Max: 0.9)
-        var randb : Float = randFloat(Min: 0.7, Max: 0.9)
-        var cellcolor = UIColor(red:CGFloat(randr), green:CGFloat(randg), blue:CGFloat(randb), alpha:1.0)
-        cell.backgroundColor = cellcolor
-        */
+        let cell = tableView.dequeueReusableCellWithIdentifier("HierarchyCell", forIndexPath: indexPath)
         
         //var randg : Float = randFloat(Min: 0.7, Max: 0.9)
         let cellcolor = UIColor(
@@ -80,12 +72,11 @@ class RootTVC: UITableViewController {
         cell.backgroundColor = cellcolor
         
         //get entry
-        var entry = entries[entries.count-indexPath.row-1]// as! NSDictionary
+        var entry = entries[entries.count-indexPath.row-1]
         
         //set title
         cell.textLabel!.text = entry["contents"].string!
         cell.detailTextLabel?.text = entry["name"].string
-        //cell.detailTextLabel?.text = cell.detailTextLabel!.text! + "Phone:" + entry["phone"].string!
         
         return cell
     }
@@ -133,95 +124,20 @@ class RootTVC: UITableViewController {
         }
     }
     
+    //tableに値を挿入
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("Num: \(indexPath.row)")
-        //println("Value: \(entries[indexPath.row])")
-        
         ud.setObject(entries[entries.count-indexPath.row-1]["my_hierarchy"].string!, forKey: "selected_path")
         
-        /*
-        ud.setInteger(entries[entries.count-indexPath.row-1]["id"].int!, forKey: "selected_todo_id")
-        ud.setObject(entries[entries.count-indexPath.row-1]["content"].string, forKey: "selected_title")
-        ud.setObject(entries[entries.count-indexPath.row-1]["message"].string, forKey: "selected_message")
-        */
-
-        /*
-        var nex : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("RangeContents")
-        //self.presentViewController(nex as! UIViewController, animated: true, completion: nil)
-        self.navigationController!.pushViewController(nex as! UIViewController, animated: true)
-        */
     }
     
+    //投稿画面へ遷移
     @IBAction func post_pushed(sender: AnyObject) {
         ud.setObject("/", forKey: "selected_path")
     }
     
+    //Floatランダム値生成
     func randFloat(Min _Min : Float, Max _Max : Float)->Float {
-        
         return ( Float(arc4random_uniform(UINT32_MAX)) / Float(UINT32_MAX) ) * (_Max - _Min) + _Min
     }
-    
-    
-    /*
-    //
-    //swipe menu
-    //
-    override func tableView(tableView: UITableView,canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
-    {
-        return true
-    }
-    
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        if editingStyle == UITableViewCellEditingStyle.Delete {
-            //arr.removeObjectAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-        }
-    }
-    
-    
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
-        // 1
-        var shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Profile" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            // 2
-            /*
-            let shareMenu = UIAlertController(title: nil, message: "Share using", preferredStyle: .ActionSheet)
-            
-            let twitterAction = UIAlertAction(title: "Twitter", style: UIAlertActionStyle.Default, handler: nil)
-            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-            
-            shareMenu.addAction(twitterAction)
-            shareMenu.addAction(cancelAction)
-            
-            
-            self.presentViewController(shareMenu, animated: true, completion: nil)
-            */
-            println("GoProfile")
-        })
-        // 3
-        var rateAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "☆" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            /*
-            // 4
-            let rateMenu = UIAlertController(title: nil, message: "Rate this App", preferredStyle: .ActionSheet)
-            
-            let appRateAction = UIAlertAction(title: "Rate", style: UIAlertActionStyle.Default, handler: nil)
-            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-            
-            rateMenu.addAction(appRateAction)
-            rateMenu.addAction(cancelAction)
-            
-            
-            self.presentViewController(rateMenu, animated: true, completion: nil)
-            */
-            let favMenu = UIAlertController(title: nil, message: "Favorited", preferredStyle: .ActionSheet)
-            let favAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-            favMenu.addAction(favAction)
-            println("faved")
-            self.presentViewController(favMenu, animated: true, completion: nil)
-            
-        })
-        // 5
-        return [shareAction,rateAction]
-    }
-    */
 }
