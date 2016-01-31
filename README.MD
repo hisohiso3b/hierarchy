@@ -8,6 +8,8 @@ All of writings are hierarchy.
 ## Features
 
 - All of writings are hierarchy.
+- Swift iOS client
+- Node.js and MongoDB is used for server system
 
 ## Usage
 - type on your console to "clone https://github.com/hisohiso3b/hierarchy.git"
