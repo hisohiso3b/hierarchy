@@ -180,14 +180,11 @@ class UpdateProfileVC: UIViewController,UIImagePickerControllerDelegate,UINaviga
         }
     }
     
-    
+    //画像をランダムで1つ設定する
     @IBAction func selectImage(sender: AnyObject) {
         rnum = Int(arc4random() % 59 + 1)
         
-        var params = [
-            "image_num": rnum
-        ]
-        
+        //20回以上連続で画像取得するとアプリを強制終了（サーバー保護）
         if image_reload_count < 20{
             let url = NSURL(string: baseurl+"/get_image/\(self.rnum)")
             var err: NSError?
