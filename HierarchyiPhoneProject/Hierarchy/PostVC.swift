@@ -88,16 +88,6 @@ class PostVC: UIViewController {
             print("posted")
             self.navigationController?.popViewControllerAnimated(true)
             
-            /*
-            Alamofire.request(.GET, "http://httpbin.org/get")
-            .responseString { (_, _, string, _) in
-            println(string)
-            }
-            .responseJSON { (_, _, JSON, _) in
-            println(JSON)
-            }
-            */
-            
         }else{
             print("error")
         }

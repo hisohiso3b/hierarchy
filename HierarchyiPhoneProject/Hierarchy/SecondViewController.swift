@@ -51,6 +51,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Dispose of any resources that can be recreated.
     }
     
+    //send the Message
     @IBAction func pushSend(sender: AnyObject) {
         if(postformTextfield.text != ""){
             let parameters : [String: AnyObject] = [
@@ -63,16 +64,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             Alamofire.request(.POST, baseurl + "/post_message", parameters: parameters, encoding: .JSON)
             print("posted")
-            
-            /*
-            Alamofire.request(.GET, "http://httpbin.org/get")
-                .responseString { (_, _, string, _) in
-                    println(string)
-                }
-                .responseJSON { (_, _, JSON, _) in
-                    println(JSON)
-            }
-            */
             
         }
     }
@@ -101,7 +92,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath:NSIndexPath) {
-        var text: String = data[data.count-indexPath.row-2]["parent_hierarchy"].string!
+        let text: String = data[data.count-indexPath.row-2]["parent_hierarchy"].string!
         print(text)
         
         ud.setObject(text, forKey: "selected_path")
@@ -121,7 +112,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func reloadData(){
         let url = baseurl + "/id_get"
         
-        var params : [String:AnyObject!] =
+        let params : [String:AnyObject!] =
         [
             "id" : ud.stringForKey("id")
         ]
@@ -132,7 +123,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     NSLog("Error: \(res.result.error)")
                     print(res.result.value)
                     
-                    var alert = UIAlertView()
+                    let alert = UIAlertView()
                     alert.title = "Connection Error"
                     alert.message = ""
                     alert.addButtonWithTitle("OK")
@@ -150,19 +141,18 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     print(NSString(string: self.data[self.data.count-1]["red"].string!).floatValue)
                     
                     
-                    var red = CGFloat( NSString(string: self.data[self.data.count-1]["red"].string!).floatValue )
-                    var green = CGFloat( NSString(string: self.data[self.data.count-1]["green"].string!).floatValue )
-                    var blue = CGFloat( NSString(string: self.data[self.data.count-1]["blue"].string!).floatValue )
+                    let red = CGFloat( NSString(string: self.data[self.data.count-1]["red"].string!).floatValue )
+                    let green = CGFloat( NSString(string: self.data[self.data.count-1]["green"].string!).floatValue )
+                    let blue = CGFloat( NSString(string: self.data[self.data.count-1]["blue"].string!).floatValue )
                     
                     self.navigationController?.navigationBar.barTintColor = UIColor(red:1.0-red, green:1.0-green, blue:1.0-blue, alpha: 1.0)
                     self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red:red, green:green, blue:blue, alpha: 1.0)]
                     self.navigationController?.navigationBar.tintColor = UIColor(red:red, green:green, blue:blue, alpha: 1.0)
                     
-                    var imgnum = NSString(string: self.data[self.data.count-1]["image_num"].string!).intValue
+                    let imgnum = NSString(string: self.data[self.data.count-1]["image_num"].string!).intValue
                     let url = NSURL(string: baseurl+"/get_image/\(imgnum)")
-                    var err: NSError?
-                    var imageData :NSData = NSData(contentsOfURL: url!)!
-                    var img = UIImage(data:imageData)
+                    let imageData :NSData = NSData(contentsOfURL: url!)!
+                    let img = UIImage(data:imageData)
                     self.userImageView.image = img
 
                     //let base64 = (self.data[self.data.count-1]["image"].rawData())!
@@ -170,78 +160,9 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                 }
                 
-                /*
-                self.connectcount++
-                if(self.connectcount>20){
-                    exit(0)
-                }
-                */
         }
     }
     
-    
-    /*
-    //removecell
-    
-    func tableView(tableView: UITableView,canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
-    {
-        return true
-    }
-    
-    
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        if editingStyle == UITableViewCellEditingStyle.Delete {
-            //arr.removeObjectAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-        }
-    }
-    
-
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
-        // 1
-        var shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Profile" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            // 2
-            /*
-            let shareMenu = UIAlertController(title: nil, message: "Share using", preferredStyle: .ActionSheet)
-            
-            let twitterAction = UIAlertAction(title: "Twitter", style: UIAlertActionStyle.Default, handler: nil)
-            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-            
-            shareMenu.addAction(twitterAction)
-            shareMenu.addAction(cancelAction)
-            
-            
-            self.presentViewController(shareMenu, animated: true, completion: nil)
-            */
-            println("Shared")
-        })
-        // 3
-        var rateAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "☆" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            /*
-            // 4
-            let rateMenu = UIAlertController(title: nil, message: "Rate this App", preferredStyle: .ActionSheet)
-            
-            let appRateAction = UIAlertAction(title: "Rate", style: UIAlertActionStyle.Default, handler: nil)
-            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-            
-            rateMenu.addAction(appRateAction)
-            rateMenu.addAction(cancelAction)
-            
-            
-            self.presentViewController(rateMenu, animated: true, completion: nil)
-            */
-            let favMenu = UIAlertController(title: nil, message: "Favorited", preferredStyle: .ActionSheet)
-            let favAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-            favMenu.addAction(favAction)
-            println("faved")
-            self.presentViewController(favMenu, animated: true, completion: nil)
-
-        })
-        // 5
-        return [shareAction,rateAction]
-    }
-    */
 }
 
 

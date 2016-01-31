@@ -90,7 +90,7 @@ class UpdateProfileVC: UIViewController,UIImagePickerControllerDelegate,UINaviga
                 NSLog("Success")
                 
                 
-                
+                //IMAGE_UPLOAD
                 /*
                 let data:NSData = imagedata//NSData(data: UIImageJPEGRepresentation(image, 1))
                 let tmpFilePath:String = NSTemporaryDirectory() + "icon_tmp.png"
@@ -129,8 +129,9 @@ class UpdateProfileVC: UIViewController,UIImagePickerControllerDelegate,UINaviga
             })
             
             
-            //post_params("/user_update", params: params)
             
+            //IMAGE_UPLOAD
+            //post_params("/user_update", params: params)
             /*
             Alamofire.request(.POST, baseurl + "/user_update",parameters: params, encoding: .JSON).response({ (_, _, result, err) -> Void in
                 
@@ -187,16 +188,6 @@ class UpdateProfileVC: UIViewController,UIImagePickerControllerDelegate,UINaviga
             "image_num": rnum
         ]
         
-        /*
-        Alamofire.request(.GET, baseurl + "/get_image", parameters: params)
-            .responseJSON { (req, res, json, error) in
-                if(error != nil) {
-                    println("cant get the image \(self.rnum)")
-                }else{
-        
-        }
-        }
-        */
         if image_reload_count < 20{
             let url = NSURL(string: baseurl+"/get_image/\(self.rnum)")
             var err: NSError?
@@ -211,11 +202,6 @@ class UpdateProfileVC: UIViewController,UIImagePickerControllerDelegate,UINaviga
             exit(0)
         }
         
-        /*
-        ipc.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        // UIImagePickerControllerSourceType.PhotoLibraryでアルバムへのアクセス
-        self.presentViewController(ipc, animated:true, completion:nil)
-        */
     }
     
     
@@ -297,22 +283,17 @@ class UpdateProfileVC: UIViewController,UIImagePickerControllerDelegate,UINaviga
                 var err: NSError?
                 let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableLeaves) as? NSDictionary
                 
-                // Did the JSONObjectWithData constructor return an error? If so, log the error to the console
                 if(err != nil) {
                     print(err!.localizedDescription)
                     let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
                     print("Error could not parse JSON: '\(jsonStr)'")
                 }
                 else {
-                    // The JSONObjectWithData constructor didn't return an error. But, we should still
-                    // check and make sure that json has a value using optional binding.
                     if let parseJSON = json {
-                        // Okay, the parsedJSON is here, let's get the value for 'success' out of it
-                        var success = parseJSON["success"] as? Int
+                        let success = parseJSON["success"] as? Int
                         print("Succes: \(success)")
                     }
                     else {
-                        // Woa, okay the json object was nil, something went worng. Maybe the server isn't running?
                         let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
                         print("Error could not parse JSON: \(jsonStr)")
                     }

@@ -55,9 +55,6 @@ class CustomCell: UITableViewCell, TTTAttributedLabelDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let next: UIViewController = storyboard.instantiateViewControllerWithIdentifier("ProfileVC") 
-        //var navigationController: UINavigationController! = storyboard.instantiateViewControllerWithIdentifier("ProfileVC").navigationController
-        //self.presentViewController(next, animated: true, completion: nil)
-        //navigationController.pushViewController(next as UIViewController, animated: true)
     }
     
 }
