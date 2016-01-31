@@ -90,7 +90,7 @@ app.get('/create_user', function (req, res) {
                             });
         });
 
-//idから投稿とユーザー情報を取得
+//idから投稿とユーザー情報を取得
 app.get('/id_get', function (req, res) {
         
         console.log(req.query); // for logging
