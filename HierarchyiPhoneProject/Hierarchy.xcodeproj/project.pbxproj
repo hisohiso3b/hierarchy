@@ -125,14 +125,14 @@
 		B0DEB36A1B1D916500A505AA /* HierarchyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HierarchyCell.swift; sourceTree = "<group>"; };
 		B0E8F5BE1B26F2DC003DBB14 /* hiso_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hiso_logo.png; sourceTree = "<group>"; };
 		B0EE210E1B215BB1009DD50F /* Net */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Net; path = Hierarchy/Net; sourceTree = "<group>"; };
-		B0EE21141B215CBF009DD50F /* GCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GCD.swift; path = Hierarchy/Net/GCD.swift; sourceTree = "<group>"; };
-		B0EE21161B215CC3009DD50F /* Net.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Net.swift; path = Hierarchy/Net/Net.swift; sourceTree = "<group>"; };
-		B0EE21181B215CCE009DD50F /* NetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetData.swift; path = Hierarchy/Net/NetData.swift; sourceTree = "<group>"; };
-		B0EE211A1B215CD2009DD50F /* NetDownloadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetDownloadTask.swift; path = Hierarchy/Net/NetDownloadTask.swift; sourceTree = "<group>"; };
-		B0EE211C1B215CD6009DD50F /* NetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetHelper.swift; path = Hierarchy/Net/NetHelper.swift; sourceTree = "<group>"; };
-		B0EE211E1B215CDA009DD50F /* NetRequestSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetRequestSerialization.swift; path = Hierarchy/Net/NetRequestSerialization.swift; sourceTree = "<group>"; };
-		B0EE21201B215CDE009DD50F /* NetResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetResponseData.swift; path = Hierarchy/Net/NetResponseData.swift; sourceTree = "<group>"; };
-		B0EE21221B215CE4009DD50F /* NetUploadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetUploadTask.swift; path = Hierarchy/Net/NetUploadTask.swift; sourceTree = "<group>"; };
+		B0EE21141B215CBF009DD50F /* GCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GCD.swift; path = Net/GCD.swift; sourceTree = "<group>"; };
+		B0EE21161B215CC3009DD50F /* Net.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Net.swift; path = Net/Net.swift; sourceTree = "<group>"; };
+		B0EE21181B215CCE009DD50F /* NetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetData.swift; path = Net/NetData.swift; sourceTree = "<group>"; };
+		B0EE211A1B215CD2009DD50F /* NetDownloadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetDownloadTask.swift; path = Net/NetDownloadTask.swift; sourceTree = "<group>"; };
+		B0EE211C1B215CD6009DD50F /* NetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetHelper.swift; path = Net/NetHelper.swift; sourceTree = "<group>"; };
+		B0EE211E1B215CDA009DD50F /* NetRequestSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetRequestSerialization.swift; path = Net/NetRequestSerialization.swift; sourceTree = "<group>"; };
+		B0EE21201B215CDE009DD50F /* NetResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetResponseData.swift; path = Net/NetResponseData.swift; sourceTree = "<group>"; };
+		B0EE21221B215CE4009DD50F /* NetUploadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetUploadTask.swift; path = Net/NetUploadTask.swift; sourceTree = "<group>"; };
 		B0F8AC721B25E01D002675DB /* cookie30u_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cookie30u_3.png; sourceTree = "<group>"; };
 		B0F8AC731B25E01D002675DB /* cookie30u_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cookie30u_1.png; sourceTree = "<group>"; };
 		B0F8AC741B25E01D002675DB /* cookie30u_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cookie30u_4.png; sourceTree = "<group>"; };
@@ -177,6 +177,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4903AF9E1C5E32DD007DFE65 /* Net */ = {
+			isa = PBXGroup;
+			children = (
+				B0EE21221B215CE4009DD50F /* NetUploadTask.swift */,
+				B0EE21201B215CDE009DD50F /* NetResponseData.swift */,
+				B0EE211E1B215CDA009DD50F /* NetRequestSerialization.swift */,
+				B0EE211C1B215CD6009DD50F /* NetHelper.swift */,
+				B0EE211A1B215CD2009DD50F /* NetDownloadTask.swift */,
+				B0EE21181B215CCE009DD50F /* NetData.swift */,
+				B0EE21161B215CC3009DD50F /* Net.swift */,
+				B0EE21141B215CBF009DD50F /* GCD.swift */,
+			);
+			name = Net;
+			sourceTree = "<group>";
+		};
 		579B67727AC354F245C090F1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,14 +205,6 @@
 			isa = PBXGroup;
 			children = (
 				B0F8AC7C1B25E0E9002675DB /* iAd.framework */,
-				B0EE21221B215CE4009DD50F /* NetUploadTask.swift */,
-				B0EE21201B215CDE009DD50F /* NetResponseData.swift */,
-				B0EE211E1B215CDA009DD50F /* NetRequestSerialization.swift */,
-				B0EE211C1B215CD6009DD50F /* NetHelper.swift */,
-				B0EE211A1B215CD2009DD50F /* NetDownloadTask.swift */,
-				B0EE21181B215CCE009DD50F /* NetData.swift */,
-				B0EE21161B215CC3009DD50F /* Net.swift */,
-				B0EE21141B215CBF009DD50F /* GCD.swift */,
 				B0EE210E1B215BB1009DD50F /* Net */,
 				B0DEB3071B1D383600A505AA /* Hierarchy */,
 				B0DEB31F1B1D383600A505AA /* HierarchyTests */,
@@ -219,6 +226,7 @@
 		B0DEB3071B1D383600A505AA /* Hierarchy */ = {
 			isa = PBXGroup;
 			children = (
+				4903AF9E1C5E32DD007DFE65 /* Net */,
 				B0DEB3101B1D383600A505AA /* Main.storyboard */,
 				B0DEB30A1B1D383600A505AA /* AppDelegate.swift */,
 				B0DEB30C1B1D383600A505AA /* FirstViewController.swift */,
@@ -233,6 +241,14 @@
 				B0DEB3661B1D7A4300A505AA /* PathVC.swift */,
 				B0DEB3131B1D383600A505AA /* Images.xcassets */,
 				B0DEB3151B1D383600A505AA /* LaunchScreen.xib */,
+				B0DEB3081B1D383600A505AA /* Supporting Files */,
+			);
+			path = Hierarchy;
+			sourceTree = "<group>";
+		};
+		B0DEB3081B1D383600A505AA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
 				B0E8F5BE1B26F2DC003DBB14 /* hiso_logo.png */,
 				B0A1BA741B1EE25100844D38 /* back2.gif */,
 				B0A1BA7E1B1EFF8E00844D38 /* back3.gif */,
@@ -245,14 +261,6 @@
 				B0A1BA601B1DCD5C00844D38 /* img_4.png */,
 				B0A1BA611B1DCD5C00844D38 /* arrow024.png */,
 				B0A1BA621B1DCD5C00844D38 /* arrow066.png */,
-				B0DEB3081B1D383600A505AA /* Supporting Files */,
-			);
-			path = Hierarchy;
-			sourceTree = "<group>";
-		};
-		B0DEB3081B1D383600A505AA /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
 				B0F8AC841B26EC54002675DB /* Icon-Small@2x-1.png */,
 				B0F8AC851B26EC54002675DB /* Icon-40@2x.png */,
 				B0F8AC861B26EC54002675DB /* Icon-40@2x-1.png */,
