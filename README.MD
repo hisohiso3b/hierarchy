@@ -1,8 +1,4 @@
-# Awesome-name
-
-![Badge Status](https://ci-as-a-service)
-
-OverviewOverviewOverview
+# Hierarchy
 
 ## Description
 
