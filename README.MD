@@ -2,7 +2,7 @@
 
 ## Description
 
-Hierarchy is bulleting board system.
+Hierarchy is bulleting board system.  
 All of writings are hierarchy.
 
 ## Features
@@ -17,5 +17,5 @@ All of writings are hierarchy.
 - run the project
 
 ## Author
-hisohiso3b
+hisohiso3b  
 [@hisohiso3b](https://twitter.com/hisohiso3b)
