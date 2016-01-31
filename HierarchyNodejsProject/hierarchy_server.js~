@@ -1,0 +1,267 @@
+var express = require("express");
+var app = express();
+var MongoClient = require("mongodb");
+var settings = require("./hierarchy_setting.js");
+var bodyParser = require('body-parser');
+var ObjectID = require('mongodb').ObjectID;
+var BinData = require('mongodb').BinData;
+app.use(bodyParser());
+
+
+/*
+MongoClient.connect("mongodb://localhost/"+settings.db, function(err,db){
+if(err){ return console.log(err); }
+console.log("connected to db")
+});
+*/
+
+// with match request to the root
+app.get('/', function (req, res) {
+  res.send('root is empty')
+})
+
+app.get('/create_user', function (req, res) {
+  ip = req.headers['x-forwarded-for'] ||
+  req.connection.remoteAddress ||
+  req.socket.remoteAddress ||
+  req.connection.socket.remoteAddress;
+
+  var id = Math.random() * 10000000000000000000;
+  if (req.query.id) {
+    id = req.query.id;
+  }
+
+  MongoClient.connect("mongodb://localhost/"+settings.db, function(err, db) {
+    if (err) { return console.dir(err); };
+
+    db.collection("users", function(err, collection) {
+      if(err){ return console.dir(err); }
+      var docs = [
+        {
+          name: "default",
+          create_ip: ip,
+          id: id,
+          create_date: new Date()
+        }
+      ];
+
+      collection.insert(docs, function(err, result){
+        if(err){ return console.dir(err); }
+        collection.find( {id: id} ).toArray(function(err, items){
+          if(err){ return console.dir(err); }
+
+          var ress = [];
+          for (i=0; i<items.length; i++){
+
+            ress.push(items[i]);
+          }
+
+          console.log("same id users : " + items.length);
+          if(items.length == 1){
+            var resJSON = JSON.stringify(ress);
+            res.send(resJSON)
+          }else{
+            return console.log("exist same id");
+          }
+
+          db.close();
+        });
+      });
+    });
+  });
+});
+
+app.get('/id_get', function (req, res) {
+
+  console.log(req.query); // for logging
+  var id = 0;
+  if (req.query.id) {
+    id = req.query.id;
+  }
+
+  MongoClient.connect("mongodb://localhost/"+settings.db, function(err, db) {
+    if (err) { return console.dir(err); };
+
+    db.collection("hierarchy", function(err, collection) {
+
+      collection.find({id: id}).toArray(function (err, items){
+        console.dir(items);
+
+        var ress = [];
+
+        for (i=0; i<items.length; i++){
+          ress.push(items[i]);
+        }
+        db.collection("users", function(err, collection) {
+          collection.find({_id: ObjectID(id)}).toArray(function (err, items){
+            ress.push(items[0]);
+            console.dir(items);
+
+            var resJSON = JSON.stringify(ress);
+            res.send(resJSON)
+
+            db.close();
+          });
+        });
+      });
+
+    });
+
+  });
+
+
+})
+
+app.get('/random.text', function (req, res) {
+  res.send('random.text')
+})
+
+app.get("/path_get", function(req, res){
+  //res.send('about')
+
+  console.log(req.query); // for logging
+  var ph = "";
+  // パラメタが空でなければ画面に表示
+  if (req.query.parents_hierarchy) {
+    ph = req.query.parents_hierarchy;
+  }
+
+  MongoClient.connect("mongodb://localhost/"+settings.db, function(err, db) {
+    if (err) { return console.dir(err); };
+
+    db.collection("hierarchy", function(err, collection) {
+      var id = Math.random() * 10000000000;
+
+      collection.find({parent_hierarchy: ph}).toArray(function (err, items){
+        console.log(ph);
+        console.dir(items);
+
+        var ress = [];
+        for (i=0; i<items.length; i++){
+          ress.push(items[i]);
+        }
+
+        var resJSON = JSON.stringify(ress);
+        res.send(resJSON)
+
+        db.close();
+      });
+
+    });
+  });
+
+})
+
+var current_edit_id = ObjectID();
+
+app.post("/user_update", function (req, res){
+  ip = req.headers['x-forwarded-for'] ||
+  req.connection.remoteAddress ||
+  req.socket.remoteAddress ||
+  req.connection.socket.remoteAddress;
+
+  console.dir(req.body);
+  MongoClient.connect("mongodb://localhost/"+settings.db, function(err, db) {
+    if (err) { return console.dir(err); }
+    db.collection("users", function(err, collection) {
+
+      var docs = {
+        name: req.body.name,
+        update_ip: ip,
+        update_date: new Date()
+      }
+
+      //console.log(req.body.id.length);
+
+      var id = ObjectID.createFromHexString(req.body.id)
+      //console.log(id)
+
+      collection.update({ "_id" : id }, { $set: docs }, function(err, result) {
+        if(err){ res.send("{success: false}") };
+        res.send( "{success: true}" );
+        current_edit_id = id
+
+        db.close();
+      });
+
+    });
+  });
+
+});
+
+app.post("/image_upload", function (req, res){
+  ip = req.headers['x-forwarded-for'] ||
+  req.connection.remoteAddress ||
+  req.socket.remoteAddress ||
+  req.connection.socket.remoteAddress;
+
+  //console.log(req);
+  console.dir(MongoClient.Binary(req.body));
+
+  MongoClient.connect("mongodb://localhost/"+settings.db, function(err, db) {
+    db.collection("users", function(err, collection) {
+      if(req.body){
+        console.log("image saving");
+
+        fs.writeFile("./user_images/"+current_edit_id+'.png', req.body, 'binary', function(err){
+          if (err) throw err;
+          current_edit_id = ObjectID();
+          // Save file to S3
+        });
+
+        /*
+        collection.update({ "_id" : current_edit_id }, { $set: {image: MongoClient.Binary(req.body)} }, function(err, result) {
+        if(err){ res.send("{success: false}") };
+
+        res.send( "{success: true}" );
+        current_edit_id = ObjectID();
+        db.close();
+
+        console.log("image saved");
+      });
+      */
+    }else{
+      console.log("no image");
+      db.close();
+    }
+  });
+});
+});
+
+
+app.post("/post_message", function (req, res){
+  ip = req.headers['x-forwarded-for'] ||
+  req.connection.remoteAddress ||
+  req.socket.remoteAddress ||
+  req.connection.socket.remoteAddress;
+  console.log("get post request");
+  console.dir(req.body);
+  MongoClient.connect("mongodb://localhost/"+settings.db, function(err, db) {
+    if (err) { return console.dir(err); }
+    db.collection("hierarchy", function(err, collection) {
+      var docs = [
+        {
+          name: req.body.name,
+          id: req.body.id,
+          contents: req.body.contents,
+          my_hierarchy: req.body.my_hierarchy,
+          parent_hierarchy: req.body.parent_hierarchy,
+          create_ip: ip,
+          create_date: new Date()
+        }
+      ]
+
+      collection.insert(docs, function(err, result) {
+        if(err){ res.send("{success: false}") };
+        res.send( "{success: true}" );
+
+        db.close();
+      });
+    });
+  });
+
+  //    res.send(req.body);
+
+});
+
+app.listen(settings.port, settings.host);
