@@ -125,6 +125,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.refreshControl!.endRefreshing()
     }
     
+    //ユーザーの投稿データ取得
     func reloadData(){
         let url = baseurl + "/id_get"
         
@@ -180,6 +181,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    //ブロックユーザーの追加
     @IBAction func block_pushed(sender: AnyObject) {
         print(block_button.titleLabel?.text)
         let id = ud.stringForKey("selected_id")!

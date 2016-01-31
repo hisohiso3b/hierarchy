@@ -53,7 +53,7 @@ class FirstViewController: UIViewController {
             presentViewController(alertController, animated: true, completion: nil)
         }
         
-        //初回起動後すぐに終了してしまった場合のバグ修正。
+        //初回起動後、承諾後すぐに終了してしまった場合のバグ修正。
         if ud.boolForKey("EULA") {
             
             createUser()

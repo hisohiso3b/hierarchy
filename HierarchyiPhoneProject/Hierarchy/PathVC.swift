@@ -35,6 +35,7 @@ class PathVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //入力された階層へ移動
     @IBAction func goPath(sender: AnyObject) {
         ud.setObject(pathTextField.text, forKey: "selected_path")
         let next: UIViewController = self.storyboard!.instantiateViewControllerWithIdentifier("PathTVC") 
@@ -42,6 +43,7 @@ class PathVC: UIViewController {
         self.navigationController!.pushViewController(next as UIViewController, animated: true)
     }
     
+    //キーボードを下げる
     @IBAction func tapScreen(sender: AnyObject) {
         self.view.endEditing(true)
 

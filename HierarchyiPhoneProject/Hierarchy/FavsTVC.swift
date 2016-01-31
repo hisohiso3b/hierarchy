@@ -86,6 +86,7 @@ class FavsTVC: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDele
         
     }
     
+    //左へスワイプ、削除の設定。
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             entries.removeAtIndex(indexPath.row)
