@@ -10,11 +10,10 @@ All of writings are hierarchy.
 - All of writings are hierarchy.
 
 ## Usage
-
-## Installation
-
-## Anything Else
+- type on your console to "clone https://github.com/hisohiso3b/hierarchy.git"
+- open [clone_dir]/HierarchyiPhoneProject/Hierarchy.xcworkspace on Xcode
+- run the project
 
 ## Author
-
-[@b4b4r07](https://twitter.com/hisohiso3b)
+hisohiso3b
+[@hisohiso3b](https://twitter.com/hisohiso3b)
